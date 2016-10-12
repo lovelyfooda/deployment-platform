@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="IM-AGENT" version="3.0">
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- Error Page Define -->
+	<error-page>
+		<error-code>500</error-code>
+		<location>/commons/error.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/commons/404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/commons/403.jsp</location>
+	</error-page>
+
+	<!-- Spring-Context loader -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:spring/applicationContext-*.xml</param-value>
+	</context-param>
+	<context-param>
+		<param-name>spring.profiles.active</param-name>
+		<param-value>develop</param-value>
+	</context-param>
+
+	<!-- Character Encoding filter -->
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+
+	<filter>
+		<filter-name>WeChatFilter</filter-name>
+		<filter-class>com.ec.imagent.framework.filter.WeChatFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>WeChatFilter</filter-name>
+		<url-pattern>/wechat/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>BatchJobFilter</filter-name>
+		<filter-class>com.ec.imagent.framework.filter.BatchJobFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>BatchJobFilter</filter-name>
+		<url-pattern>/batch/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- LoggerMDCFilter -->
+	<filter> 
+	   <filter-name>LoggerMDCFilter</filter-name> 
+	   <filter-class>com.ec.framework.core.filter.LoggerMDCFilter</filter-class> 
+	</filter> 
+	<filter-mapping> 
+		<filter-name>LoggerMDCFilter</filter-name> 
+		<url-pattern>/*</url-pattern> 
+	</filter-mapping>
+
+	<!--Spring ApplicationContext Loader -->
+	<listener>
+		<listener-class>com.ec.imagent.listener.EcContextListener</listener-class>
+	</listener>
+
+	<!-- Spring support request session scope -->
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+
+	<!-- Spring Introspector prevent memory leak -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+
+	<!-- springmvc config -->
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath*:spring/springmvc-servlet.xml</param-value>            
+        </init-param>
+		
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+</web-app>
