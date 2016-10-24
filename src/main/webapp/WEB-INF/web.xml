@@ -22,7 +22,7 @@
 		be specified for component-scanning -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>com.lqp.deploy.spring.AppConfig</param-value>
+		<param-value>com.lqp.deploy.spring.ApplicationContext</param-value>
 	</context-param>
 
 	<!-- Bootstrap the root application context as usual using ContextLoaderListener -->

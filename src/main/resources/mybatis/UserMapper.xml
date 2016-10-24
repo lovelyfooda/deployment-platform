@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- namespace用于java代码调用时识别指定xml的mapper文件 -->
+<mapper namespace="com.ec.dcdiscuss.repository.IUserRepository">
+
+	<select id="getUserInfo" resultType="userDetail">
+		SELECT 
+			a.f_id AS corpId, 
+			b.f_name AS userName
+		FROM 
+			d_ec_user.t_user_group a,
+			d_ec_user.t_user_detail b
+		WHERE				
+			b.f_id = ${userId}
+			AND a.f_group_id = b.f_id
+			AND a.f_type = 0			
+	</select>
+    
+</mapper>  

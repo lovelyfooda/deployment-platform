@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="off" monitorInterval="1800">
+	<Properties>
+		<Property name="filePathPrefix">/data/logs/deployment-platform</Property>
+		<property name="appName">deployment-platform</property>
+	</Properties>
+	<Appenders>
+		<Console name="CONSOLE" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="customer-center %d - %X - %c -%-4r [%t] %-5p  %x - %m%n" />
+		</Console>
+
+		<RollingRandomAccessFile name="CustomerCenterLogApp"
+			fileName="${filePathPrefix}/customer-center-log.log" immediateFlush="true"
+			append="true"
+			filePattern="${filePathPrefix}/$${date:yyyy-MM}/customer-center-log/customer-center-log-%d{yyyy-MM-dd}-%i.log">
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="50" />
+			<PatternLayout>
+				<Pattern>[customer-center] %d - %X - %c -%-4r [%t] %-5p %x - %m%n
+				</Pattern>
+			</PatternLayout>
+		</RollingRandomAccessFile>
+
+		<RollingRandomAccessFile name="CustomerErrorLogApp"
+			fileName="${filePathPrefix}/customer-error-log.log" immediateFlush="true"
+			append="true"
+			filePattern="${filePathPrefix}/$${date:yyyy-MM}/customer-error-log/customer-error-log-%d{yyyy-MM-dd}-%i.log">
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="50" />
+			<PatternLayout>
+				<Pattern>[customer-center] %d - %X - %c -%-4r [%t] %-5p %x - %m%n
+				</Pattern>
+			</PatternLayout>
+		</RollingRandomAccessFile>
+
+		<RollingRandomAccessFile name="InterfaceLogApp"
+			fileName="${filePathPrefix}/customer-interface-log.log"
+			immediateFlush="true" append="true"
+			filePattern="${filePathPrefix}/$${date:yyyy-MM}/customer-interface-log/customer-interface-log-%d{yyyy-MM-dd}-%i.log">
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="50" />
+			<PatternLayout>
+				<Pattern>[customer-center] %d - %X - %c -%-4r [%t] %-5p %x - %m%n
+				</Pattern>
+			</PatternLayout>
+		</RollingRandomAccessFile>
+
+		<RollingRandomAccessFile name="MsgLogApp"
+			fileName="${filePathPrefix}/msg-log.log" immediateFlush="false"
+			append="true"
+			filePattern="${filePathPrefix}/$${date:yyyy-MM}/msg-log/msg-log-%d{yyyy-MM-dd}-%i.log">
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="50" />
+			<PatternLayout>
+				<Pattern>[dis-update] %d - %X - %c -%-4r [%t] %-5p %x - %m%n
+				</Pattern>
+			</PatternLayout>
+		</RollingRandomAccessFile>
+
+		<Console name="consolePrint" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+
+	</Appenders>
+	<Loggers>
+		<!-- <logger name="org.springframework" level="WARN"></logger> -->
+		<!-- <logger name="com.atomikos.icatch" level="WARN"></logger> -->
+		<!-- <logger name="org.eclipse.jetty" level="WARN"></logger> -->
+		<!-- <logger name="java.sql.Connection" level="DEBUG"></logger> -->
+		<!-- <logger name="java.sql.Statement" level="DEBUG"></logger> -->
+		<!-- <logger name="java.sql.ResultSet" level="DEBUG"></logger> -->
+		<!-- <logger name="java.sql.PreparedStatement" level="DEBUG"></logger> -->
+		<!-- <logger name="org.mybatis.spring" level="DEBUG"></logger> -->
+		<!-- <logger name="com.trendrr.nsq" level="DEBUG"></logger> -->
+
+		<logger name="com.lqp.deploy.repository.IServerRepository" level="DEBUG"
+			additivity="false">
+			<appender-ref ref="consolePrint" />
+		</logger>
+		
+		<Root level="debug">
+			<AppenderRef ref="CONSOLE" />
+			<!-- <AppenderRef ref="CustomerCenterLogApp"/> -->
+		</Root>
+
+		<!-- <AsyncLogger name="interfaceLog" level="DEBUG" -->
+		<!-- includeLocation="true"> -->
+		<!-- <AppenderRef ref="InterfaceLogApp" /> -->
+		<!-- </AsyncLogger> -->
+
+		<!-- <AsyncLogger name="MsgLog" level="DEBUG" includeLocation="true"> -->
+		<!-- <AppenderRef ref="MsgLogApp" /> -->
+		<!-- </AsyncLogger> -->
+
+		<!-- <AsyncLogger name="errorLog" level="DEBUG" -->
+		<!-- includeLocation="true"> -->
+		<!-- <AppenderRef ref="CustomerErrorLogApp" /> -->
+		<!-- </AsyncLogger> -->
+
+	</Loggers>
+</Configuration>
