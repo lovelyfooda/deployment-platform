@@ -23,9 +23,24 @@
 		<log4jdbc.version>1.2</log4jdbc.version>
 		<slf4j-api.version>1.6.0</slf4j-api.version>
 		<log4jdbc.version>1.2</log4jdbc.version>
+		<!-- json -->
+		<gson.version>2.2.2</gson.version>
+		<!-- ssh tools -->
+		<jsch.version>0.1.54</jsch.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>${jsch.version}</version>
+		</dependency>
+		<!-- json -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${gson.version}</version>
+		</dependency>
 		<!-- mysql database driver -->
 		<dependency>
 			<groupId>mysql</groupId>

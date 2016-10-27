@@ -1,5 +1,7 @@
 package com.lqp.deploy.entity;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -17,6 +19,10 @@ public class Server {
     private String type;// 所属环境
     private String describe;// 描述
     private Long secretId; // 使用的秘钥ID
+
+    // 对象属性
+    private Credentials credentials;
+    private List<Project> projects;
 
     public Long getId() {
         return id;
@@ -64,6 +70,22 @@ public class Server {
 
     public void setSecretId(Long secretId) {
         this.secretId = secretId;
+    }
+
+    public Credentials getCredentials() {
+        return credentials;
+    }
+
+    public void setCredentials(Credentials credentials) {
+        this.credentials = credentials;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 
 }
