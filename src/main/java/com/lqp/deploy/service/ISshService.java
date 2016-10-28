@@ -8,6 +8,6 @@ package com.lqp.deploy.service;
  */
 public interface ISshService {
 
-    public String exec(String username, String host, int port, String password, String command);
+    public String exec(String username, String host, int port, String password, String command, int type);
 
 }

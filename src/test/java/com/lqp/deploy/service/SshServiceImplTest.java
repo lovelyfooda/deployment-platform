@@ -28,8 +28,8 @@ public class SshServiceImplTest {
     @Test
     public void execTest() {
         SshServiceImpl sshService = (SshServiceImpl) ctx.getBean("sshServiceImpl");
-        String result = sshService.exec("root", "10.0.200.59", 22, "123456", "pwd");
-        System.out.println(result);
+        String result = sshService.exec("ecjava", "192.168.1.101", 932, "E:\\ecjava", "sudo /ec/apps/global-id/script/stop.sh", 1);
+        // System.out.println(result);
     }
 
 }

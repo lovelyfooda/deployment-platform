@@ -21,21 +21,25 @@ import com.jcraft.jsch.Session;
 public class SshServiceImpl implements ISshService {
 
     @Override
-    public String exec(String username, String host, int port, String password, String command) {
+    public String exec(String username, String host, int port, String password, String command, int type) {
         JSch jsch = new JSch();
         try {
+            if (1 == type) {
+                jsch.addIdentity(password);
+            }
             Session session = jsch.getSession(username, host, port);
 
             java.util.Properties config = new java.util.Properties();
             config.put("StrictHostKeyChecking", "no");
             session.setConfig(config);
 
-            session.setPassword(password);
-
+            if (2 == type) {
+                session.setPassword(password);
+            }
             session.connect();
 
             Channel channel = session.openChannel("exec");
-            ((ChannelExec) channel).setCommand("pwd");
+            ((ChannelExec) channel).setCommand(command);
 
             ((ChannelExec) channel).setErrStream(System.err);
 
