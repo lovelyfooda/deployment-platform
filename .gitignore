@@ -6,3 +6,4 @@
 !/.gitignore
 !/pom.xml
 !/assembly.xml
+!/websocket.html
